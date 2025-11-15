@@ -8,6 +8,8 @@ library(vegan)
 
 library(FactoMineR)
 
+library(ggtext)
+
 # Dados ----
 
 ## Ambientais ----
