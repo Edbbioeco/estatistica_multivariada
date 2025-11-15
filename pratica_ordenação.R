@@ -100,10 +100,12 @@ com_trat
 
 ## Calculando PERMANOVA -----
 
-vegan::adonis2(com_dist ~ Cluster,
-               data = com_trat,
-               permutations = 1000,
-               ny = "terms")
+permanova <- vegan::adonis2(com_dist ~ Cluster,
+                            data = com_trat,
+                            permutations = 1000,
+                            by = "terms")
+
+permanova
 
 ## Visualizando ----
 
@@ -123,11 +125,38 @@ nmds_scores <- nmds |>
 
 nmds_scores
 
+### Estaísticas ----
+
+perm_stats <- tibble::tibble(NMDS1 = -0.25,
+                             NMDS2 = 0.35,
+                             label = paste0("<b>F<sub>(",
+                                            permanova$Df[1],
+                                            ", ",
+                                            permanova$Df[2],
+                                            ")</sub> = ",
+                                            permanova$F[1] |> round(2),
+                                            ", p ",
+                                            ifelse(permanova$`Pr(>F)`[1] < 0.01,
+                                                   "< 0.01",
+                                                   paste0("= ",
+                                                          permanova$`Pr(>F)`[1])),
+                             ", R² = ",
+                             permanova$R2[1] |> round(2),
+                             "</b>"),
+                             Cluster = NA)
+
+perm_stats
+
 ### Gráfico ----
 
 nmds_scores |>
   ggplot(aes(NMDS1, NMDS2, fill = Cluster)) +
   geom_point(shape = 21, stroke = 1, size = 5) +
+  ggtext::geom_richtext(data = perm_stats,
+                        aes(NMDS1, NMDS2, label = label),
+                        label.colour = NA,
+                        fill = NA,
+                        size = 5) +
   scale_fill_manual(values = c("orange", "royalblue")) +
   theme_bw() +
   theme(axis.text = element_text(color = "black", size = 15),
