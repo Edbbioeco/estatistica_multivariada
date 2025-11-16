@@ -83,6 +83,8 @@ pca_scores |>
         legend.title = element_text(color = "black", size = 15),
         legend.position = "bottom")
 
+ggsave(filename = "pca.png", height = 10, width = 12)
+
 # PERMANOVA ----
 
 ## Matriz de distância de Bray-Curtis ----
@@ -168,3 +170,5 @@ nmds_scores |>
         legend.text = element_text(color = "black", size = 15),
         legend.title = element_text(color = "black", size = 15),
         legend.position = "bottom")
+
+ggsave(filename = "nmds.png", height = 10, width = 12)
