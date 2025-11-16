@@ -130,7 +130,7 @@ nmds_scores
 ### Estaísticas ----
 
 perm_stats <- tibble::tibble(NMDS1 = -0.25,
-                             NMDS2 = 0.35,
+                             NMDS2 = 0.325,
                              label = paste0("<b>F<sub>(",
                                             permanova$Df[1],
                                             ", ",
@@ -144,6 +144,8 @@ perm_stats <- tibble::tibble(NMDS1 = -0.25,
                                                           permanova$`Pr(>F)`[1])),
                              ", R² = ",
                              permanova$R2[1] |> round(2),
+                             "<br> stress = ",
+                             nmds$stress |> round(2),
                              "</b>"),
                              Cluster = NA)
 
