@@ -46,7 +46,7 @@ des <- dados |>
                                                     " ± ",
                                                     Valor |> sd() |> round(2)),
                    .by = Variável) |>
-  dplyr::mutate(n = 33) |>
+  dplyr::mutate(n = 11) |>
   dplyr::relocate(n, .before = Variável)
 
 des
