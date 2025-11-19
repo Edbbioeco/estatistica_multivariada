@@ -10,6 +10,8 @@ library(FactoMineR)
 
 library(ggtext)
 
+library(ggview)
+
 # Dados ----
 
 ## Ambientais ----
@@ -74,14 +76,15 @@ pca_scores
 
 pca_scores |>
   ggplot(aes(`PC1 (43.85%)`, `PC2 (24.17%)`, fill = Cluster)) +
-  geom_point(shape = 21, stroke = 1, size = 5) +
+  geom_point(shape = 21, stroke = 1, size = 7.5) +
   scale_fill_manual(values = c("orange", "royalblue")) +
   theme_bw() +
   theme(axis.text = element_text(color = "black", size = 15),
         axis.title = element_text(color = "black", size = 15),
         legend.text = element_text(color = "black", size = 15),
         legend.title = element_text(color = "black", size = 15),
-        legend.position = "bottom")
+        legend.position = "bottom") +
+  ggview::canvas(height = 10, width = 12)
 
 ggsave(filename = "pca.png", height = 10, width = 12)
 
@@ -157,18 +160,20 @@ perm_stats
 
 nmds_scores |>
   ggplot(aes(NMDS1, NMDS2, fill = Cluster)) +
-  geom_point(shape = 21, stroke = 1, size = 5) +
+  geom_point(shape = 21, stroke = 1, size = 7.5) +
   ggtext::geom_richtext(data = perm_stats,
                         aes(NMDS1, NMDS2, label = label),
                         label.colour = NA,
                         fill = NA,
-                        size = 5) +
+                        size = 10) +
   scale_fill_manual(values = c("orange", "royalblue")) +
   theme_bw() +
   theme(axis.text = element_text(color = "black", size = 15),
         axis.title = element_text(color = "black", size = 15),
         legend.text = element_text(color = "black", size = 15),
         legend.title = element_text(color = "black", size = 15),
-        legend.position = "bottom")
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 10, width = 12)
 
 ggsave(filename = "nmds.png", height = 10, width = 12)
