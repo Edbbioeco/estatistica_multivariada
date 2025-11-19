@@ -6,6 +6,8 @@ library(tidyverse)
 
 library(flextable)
 
+library(ggview)
+
 # Dados ----
 
 ## Importando ----
@@ -63,3 +65,38 @@ des_flex
 
 des_flex |>
   flextable::save_as_image(path = "tabela_descritivas.png")
+
+# Histogramas ----
+
+dados |>
+  tidyr::pivot_longer(cols = dplyr::where(is.numeric),
+                      values_to = "Valor",
+                      names_to = "Variável") |>
+  dplyr::filter(!Variável |> stringr::str_detect("Número")) |>
+  dplyr::mutate(Variável = dplyr::case_when(Variável |>
+                                              stringr::str_detect("Área") ~ paste0(Variável, " (m²)"),
+                                            Variável |>
+                                              stringr::str_detect("Altura") ~ paste0(Variável, " (cm)"),
+                                            Variável |>
+                                              stringr::str_detect("Temp") ~ paste0(Variável, " (°C)"),
+                                            Variável |>
+                                              stringr::str_detect("híd") ~ paste0(Variável, " (m)"),
+                                            Variável |>
+                                              stringr::str_detect("Bor") ~ paste0(Variável, " (m)"),
+                                            Variável |>
+                                              stringr::str_detect("Alt") ~ paste0(Variável, " (m)"),
+                                            .default = Variável)) |>
+  ggplot(aes(Valor)) +
+  geom_histogram(color = "black") +
+  facet_wrap(~Variável, scales = "free_x") +
+  labs(x = "Valor da Variável",
+       y = "Contagem") +
+  theme_bw() +
+  theme(axis.text = element_text(color = "black", size = 15),
+        axis.title = element_text(color = "black", size = 15),
+        strip.text = element_text(color = "black", size = 15),
+        strip.background = element_rect(color = "black", linewidth = 1),
+        panel.background = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "histograma_variaveis.png", height = 10, width = 12)
