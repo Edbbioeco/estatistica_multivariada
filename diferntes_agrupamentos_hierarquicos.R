@@ -28,7 +28,7 @@ dados |> dplyr::glimpse()
 
 # Agrupamento hierárquico ----
 
-## Calculando uma matriz de distância ----
+## Calculando a matriz de distância ----
 
 dist_euclid <- dados |>
   tibble::column_to_rownames(var = "Unidade Amostral") |>
