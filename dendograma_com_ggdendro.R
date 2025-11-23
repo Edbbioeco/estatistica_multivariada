@@ -38,7 +38,7 @@ dist_euclid
 upgma <- dist_euclid |>
   hclust(method = "average")
 
-upgma
+upgma$
 
 upgma |> plot()
 
