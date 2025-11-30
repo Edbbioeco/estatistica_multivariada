@@ -25,7 +25,7 @@ dados |> dplyr::glimpse()
 ## Tabelas das estatísticas ----
 
 des <- dados |>
-  tidyr::pivot_longer(cols = dplyr::where(is.numeric),
+  tidyr::pivot_longer(cols = c(2, 3, 5, 7 , 9),
                       values_to = "Valor",
                       names_to = "Variável") |>
   dplyr::filter(!Variável |> stringr::str_detect("Número")) |>
@@ -34,11 +34,7 @@ des <- dados |>
                                             Variável |>
                                               stringr::str_detect("Altura") ~ paste0(Variável, " (cm)"),
                                             Variável |>
-                                              stringr::str_detect("Temp") ~ paste0(Variável, " (°C)"),
-                                            Variável |>
                                               stringr::str_detect("híd") ~ paste0(Variável, " (m)"),
-                                            Variável |>
-                                              stringr::str_detect("Bor") ~ paste0(Variável, " (m)"),
                                             Variável |>
                                               stringr::str_detect("Alt") ~ paste0(Variável, " (m)"),
                                             .default = Variável)) |>
