@@ -47,7 +47,8 @@ source("pratica_agrupamentos.R")
 ## Calculando a PCA ----
 
 pca <- amb |>
-  dplyr::select_if(is.numeric) |>
+  dplyr::select(1:3, 5, 7 , 9) |>
+  tibble::column_to_rownames(var = "Unidade Amostral") |>
   vegan::decostand(method = "standardize") |>
   FactoMineR::PCA()
 
@@ -75,15 +76,16 @@ pca_scores
 ### Gráfico ----
 
 pca_scores |>
-  ggplot(aes(`PC1 (43.85%)`, `PC2 (24.17%)`, fill = Cluster)) +
+  ggplot(aes(`PC1 (50.78%)`, `PC2 (25.97%)`, fill = Cluster)) +
   geom_point(shape = 21, stroke = 1, size = 7.5) +
   scale_fill_manual(values = c("orange", "royalblue")) +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
-        legend.position = "bottom") +
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
 
 ggsave(filename = "pca.png", height = 10, width = 12)
@@ -134,9 +136,9 @@ nmds_scores
 
 ### Estaísticas ----
 
-perm_stats <- tibble::tibble(NMDS1 = -0.25,
-                             NMDS2 = 0.325,
-                             label = paste0("<b>F<sub>(",
+perm_stats <- tibble::tibble(NMDS1 = -0.19,
+                             NMDS2 = 0.31,
+                             label = paste0("<b>pseudo-F<sub>(",
                                             permanova$Df[1],
                                             ", ",
                                             permanova$Df[2],
@@ -168,10 +170,10 @@ nmds_scores |>
                         size = 10) +
   scale_fill_manual(values = c("orange", "royalblue")) +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
