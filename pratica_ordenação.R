@@ -85,7 +85,8 @@ pca_scores |>
         legend.text = element_text(color = "black", size = 25),
         legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
-        panel.border = element_rect(color = "black", linewidth = 1)) +
+        panel.border = element_rect(color = "black", linewidth = 1),
+        plot.margin = margin(10, 10, 10, 10)) +
   ggview::canvas(height = 10, width = 12)
 
 ggsave(filename = "pca.png", height = 10, width = 12)
