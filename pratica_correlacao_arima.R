@@ -4,6 +4,8 @@ library(tidyverse)
 
 library(forecast)
 
+library(ggview)
+
 # Dados ----
 
 ## Importando ----
@@ -28,12 +30,13 @@ ecs |>
   ggplot(aes(unemploy)) +
   geom_histogram(color = "black") +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
-        panel.background = element_rect(color = "black", linewidth = 1))
+        panel.background = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 10, width = 12)
 
 ### Taxa de Poupança Mensal ----
 
@@ -43,12 +46,13 @@ ecs |>
   ggplot(aes(psavert)) +
   geom_histogram(color = "black") +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
-        panel.background = element_rect(color = "black", linewidth = 1))
+        panel.background = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 10, width = 12)
 
 ## Correlção ----
 
@@ -65,12 +69,13 @@ ecs |>
   facet_wrap( ~Variável, ncol = 1, scales = "free_y") +
   scale_color_manual(values = c("orange", "royalblue")) +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
-        panel.background = element_rect(color = "black", linewidth = 1))
+        panel.background = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 10, width = 12)
 
 # Modelo ARIMA ----
 
@@ -114,10 +119,10 @@ ecs |>
                                 ticks.colour = "black",
                                 ticks.linewidth = 1)) +
   theme_bw() +
-  theme(axis.text = element_text(color = "black", size = 15),
-        axis.title = element_text(color = "black", size = 15),
-        legend.text = element_text(color = "black", size = 15),
-        legend.title = element_text(color = "black", size = 15),
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
         legend.position = "bottom",
         panel.background = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
