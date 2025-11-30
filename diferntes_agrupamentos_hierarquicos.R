@@ -108,10 +108,10 @@ gg_dendrodata <- function(agrup_hie, metodos){
     scale_y_continuous(expand = FALSE) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, hjust = 1,
-                                     color = "black", size = 15),
-          axis.text = element_text(color = "black", size = 15),
-          axis.title = element_text(color = "black", size = 15),
-          title = element_text(color = "black", size = 15),
+                                     color = "black", size = 25),
+          axis.text = element_text(color = "black", size = 25),
+          axis.title = element_text(color = "black", size = 25),
+          title = element_text(color = "black", size = 25),
           panel.grid.major.y = element_line(linewidth = 1, color = "gray80"),
           panel.grid.minor.y = element_blank(),
           panel.grid.major.x = element_blank(),
