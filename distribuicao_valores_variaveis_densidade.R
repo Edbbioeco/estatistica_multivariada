@@ -97,3 +97,29 @@ amb_trat |>
   ggview::canvas(height = 10, width = 16)
 
 ggsave(filename = "densidade_variaveis_amb.png", height = 10, width = 16)
+
+# Gráfico de pontos ----
+
+amb_trat |>
+  ggplot(aes(Valor)) +
+  geom_dotplot() +
+  geom_vline(aes(xintercept = Média, color = "Média"),
+             linewidth = 1, linetype = "dashed") +
+  geom_vline(aes(xintercept = Média - `Desvio Padrão`, color = "Desvio Padrão"),
+             linewidth = 1, linetype = "dashed") +
+  geom_vline(aes(xintercept = Média + `Desvio Padrão`, color = "Desvio Padrão"),
+             linewidth = 1, linetype = "dashed") +
+  facet_wrap(~Variável, scales = "free_x") +
+  scale_color_manual(values = c("Média" = "black",
+                                "Desvio Padrão" = "red")) +
+  labs(color = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(color = "black", size = 25),
+        axis.title = element_text(color = "black", size = 25),
+        legend.text = element_text(color = "black", size = 25),
+        legend.title = element_text(color = "black", size = 25),
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1),
+        strip.background = element_rect(color = "black", linewidth = 1),
+        strip.text = element_text(color = "black", size = 20)) +
+  ggview::canvas(height = 10, width = 16)
