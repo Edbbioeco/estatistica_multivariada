@@ -18,7 +18,7 @@ library(magrittr)
 
 ## Importando ----
 
-dados <- readxl::read_xlsx("C:/Users/LENOVO/OneDrive/Documentos/projeto mestrado/mestrado/matriz_ambientais.xlsx")
+dados <- readxl::read_xlsx("C:/Users/LENOVO/OneDrive/Documentos/projeto mestrado/dados/matriz_ambientais.xlsx")
 
 ## Visualizando ----
 
