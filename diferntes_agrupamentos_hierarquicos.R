@@ -64,28 +64,18 @@ mult_agrup
 
 ### Criando um dendro data ----
 
-mult_dendro_data <- function(x, y){
+agrup_hie <- purrr::map(mult_agrup,
+                        purrr::in_parallel(
 
-  agrup_data <- x |>
-    as.dendrogram() |>
-    ggdendro::dendro_data()
+                           ~ .x |>
+                             as.dendrogram() |>
+                             ggdendro::dendro_data()
 
-  print(agrup_data)
+                           ),
+                        .progress = TRUE) |>
+  setNames(paste0("agrupaento_", metodos))
 
-  assign(paste0("dendrodata_", y),
-         agrup_data,
-         envir = globalenv())
-
-}
-
-mult_agrup <- ls(pattern = "agrupamento_") |>
-  mget(envir = globalenv())
-
-mult_agrup
-
-purrr::walk2(mult_agrup,
-             metodos,
-             mult_dendro_data)
+agrup_hie
 
 ### Gráfico ----
 
