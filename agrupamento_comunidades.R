@@ -16,7 +16,7 @@ library(ggview)
 
 ## Importando ----
 
-com <- readxl::read_xlsx("C:/Users/LENOVO/OneDrive/Documentos/projeto mestrado/mestrado/matriz_composicao.xlsx")
+com <- readxl::read_xlsx("C:/Users/LENOVO/OneDrive/Documentos/projeto mestrado/dados/matriz_composicao.xlsx")
 
 ## Visualizando ----
 
