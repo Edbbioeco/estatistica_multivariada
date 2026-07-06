@@ -39,21 +39,6 @@ dist_euclid
 
 ## Calculando multiplos agrupamentos ----
 
-clacular_agrup <- function(x){
-
-  agrup_hie <- dist_euclid |>
-    hclust(method = x)
-
-  print(agrup_hie)
-
-  plot(agrup_hie, main = x)
-
-  assign(paste0("agrupamento_", x),
-         agrup_hie,
-         envir = globalenv())
-
-}
-
 metodos <- c("ward.D",
              "ward.D2",
              "single",
@@ -63,7 +48,17 @@ metodos <- c("ward.D",
              "median",
              "centroid")
 
-purrr::walk(metodos, clacular_agrup)
+mult_agrup <- purrr::map(metodos,
+           purrr::in_parallel(
+
+             ~dist_euclid |>
+               hclust(method = .x)
+
+           ),
+           .progress = TRUE) |>
+  setNames(metodos)
+
+mult_agrup
 
 ## Visualizando ----
 
