@@ -37,7 +37,7 @@ amb_trat <- amb |>
                                             Variável |>
                                               stringr::str_detect("Alt") ~ paste0(Variável, " (m)"),
                                             .default = Variável)) |>
-  dplyr::select(5:6)
+  dplyr::select(3:4)
 
 amb_trat
 
