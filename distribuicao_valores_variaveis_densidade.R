@@ -123,3 +123,4 @@ amb_trat |>
         strip.background = element_rect(color = "black", linewidth = 1),
         strip.text = element_text(color = "black", size = 20)) +
   ggview::canvas(height = 10, width = 16)
+
