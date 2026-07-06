@@ -25,7 +25,7 @@ amb |> dplyr::glimpse()
 ## Dados tratados ----
 
 amb_trat <- amb |>
-  tidyr::pivot_longer(cols = c(2, 3, 5, 7 , 9),
+  tidyr::pivot_longer(cols = c(2, 4:8),
                       values_to = "Valor",
                       names_to = "Variável") |>
   dplyr::mutate(Variável = dplyr::case_when(Variável |>
@@ -44,7 +44,7 @@ amb_trat
 ## Valores médios e Desvio Padrão ----
 
 medias <- amb |>
-  tidyr::pivot_longer(cols = c(2, 3, 5, 7 , 9),
+  tidyr::pivot_longer(cols = c(2, 4:8),
                       values_to = "Valor",
                       names_to = "Variável") |>
   dplyr::mutate(Variável = dplyr::case_when(Variável |>
